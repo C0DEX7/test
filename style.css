@@ -23,12 +23,12 @@
   }
   /* Overlay styling for black tint */
   .overlay {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.501); /* Adjust opacity for tint strength */
+    background: rgba(0, 0, 0, 0.8); /* Adjust opacity for tint strength */
     pointer-events: none; /* Allow clicks to pass through */
   }
 

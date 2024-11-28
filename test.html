@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomas M. Pacesa</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="meshCanvas"></canvas>
+<div class="overlay"></div> <!-- Black tint overlay -->
+
+<div class="navbar">
+  <a href="home.html" id="home" class="home nav-link" data-width="50" data-offset="0">Home</a>
+  <a href="#about" class="services a nav-link" data-width="65" data-offset="85">Services</a>
+  <a href="#services" class="about a nav-link" data-width="80" data-offset="170">Blog</a>
+  <a href="contact.html" class="contact a nav-link" data-width="70" data-offset="270">Contact</a>
+  <div class="slider"></div>
+</div>
+
+<!-- Centered information box -->
+<div class="info-box">
+     <!-- Profile image on the left -->
+  <div class="profile-image">
+    <img src="flipper.jpeg" alt="Profile Image">
+  </div>
+  
+  <!-- Info content -->
+  <div class="profile-info">
+    <h1>C0D3X7</h1>
+    <h2>Tomáš M. Pačesa</h2>
+    <p>Pentester / Child Safety Warrior / Entrepreneur</p>
+
+  </div>
+</div>
+
+<script>
+ // Select all navbar links
+ const navbarLinks = document.querySelectorAll('.navbar a');
+    const homeLink = document.getElementById('home');
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            if (link !== homeLink) {
+                homeLink.style.color = 'white'; // Turns white when hovering over other links
+            }
+        });
+
+        link.addEventListener('mouseout', () => {
+            if (link !== homeLink) {
+                homeLink.style.color = 'black'; // Resets to black
+            }
+        });
+    });
+
+    // Ensure homeLink stays black on hover
+    homeLink.addEventListener('mouseover', () => {
+        homeLink.style.color = 'black';
+    });
+
+
+  // Set up canvas and get context
+  const canvas = document.getElementById('meshCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Resize canvas when window resizes
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // Track mouse position
+  const mouse = { x: null, y: null };
+
+  // Update mouse coordinates on move
+  window.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+  });
+
+  // Cell properties
+  const cells = [];
+  const numCells = 150; // Number of cells
+  const maxDistance = 160; // Connection radius for cells and mouse
+
+  // Define the Cell class
+  class Cell {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.radius = Math.random() * 1 + 6 - 2; // Random radius between 3 and 8
+      this.dx = (Math.random() - 0.5) * 1.5; // Slower speed
+      this.dy = (Math.random() - 0.5) * 1.5; // Slower speed
+    }
+    // Update cell position and check for boundaries
+    update() {
+      this.x += this.dx;
+      this.y += this.dy;
+      if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+    }
+    // Draw the cell on the canvas
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#000'; // Black cells
+      ctx.fill();
+    }
+  }
+
+  // Initialize cells
+  for (let i = 0; i < numCells; i++) {
+    cells.push(new Cell());
+  }
+
+  // Draw connections between cells if they are close enough
+  function drawConnections() {
+    // Connect cells with each other
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = i + 1; j < cells.length; j++) {
+        const dist = Math.hypot(cells[i].x - cells[j].x, cells[i].y - cells[j].y);
+        if (dist < maxDistance) {
+          ctx.beginPath();
+          ctx.moveTo(cells[i].x, cells[i].y);
+          ctx.lineTo(cells[j].x, cells[j].y);
+          ctx.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxDistance})`;
+          ctx.lineWidth = 3; // Thicker lines
+          ctx.stroke();
+        }
+      }
+
+      // Connect cells with mouse if within range
+      const distToMouse = Math.hypot(cells[i].x - mouse.x, cells[i].y - mouse.y);
+      if (distToMouse < maxDistance) {
+        ctx.beginPath();
+        ctx.moveTo(cells[i].x, cells[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distToMouse / maxDistance})`;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Animation loop
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    cells.forEach(cell => {
+      cell.update();
+      cell.draw();
+    });
+    drawConnections();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+</html>

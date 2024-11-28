@@ -1,0 +1,203 @@
+  /* Basic reset and full-page background */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff; /* White background */
+  }
+  /* Canvas styling */
+  canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+  /* Overlay styling for black tint */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.801); /* Adjust opacity for tint strength */
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+
+  
+    /* Transparent Navigation Bar */
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: transparent; /* Fully transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  /* Navigation links */
+  .navbar .a {
+    position: relative;
+    font-size: 18px;
+    color: #ffffff; /* White text color */
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 5px 0;
+    transition: color 0.3s;
+    z-index: 9999;
+  }
+  .navbar a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .slider{
+    background-color: #ffffff;
+    width: 60px;
+    height: 25px;
+    top: 0px;
+    left: -22.6em;
+    border-radius: 18px;
+    border: 2px solid black;
+    position: relative;
+    transition: 0.3s ease;
+    z-index: 2;
+  }
+  .home {
+    position: relative;
+    font-size: 18px;
+    color: #000000;
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 5px 0;
+    transition: color 0.3s;
+    z-index: 9999;
+  }
+  .navbar a:nth-child(1):hover ~ .slider { transform: translateX(0); } 
+  .navbar a:nth-child(2):hover ~ .slider { transform: translateX(89px); }
+  .navbar a:nth-child(3):hover ~ .slider { transform: translateX(195px); }
+  .navbar a:nth-child(4):hover ~ .slider { transform: translateX(270px); }
+
+  .contact:hover ~ .slider {width: 80px;}
+  .services:hover ~ .slider{width: 80px;}
+  .about:hover ~ .slider {width: 50px;}
+
+  .navbar a:hover ~ #home,
+  .navbar a:hover + #home,
+  .navbar:hover #home {
+      color: white;
+  }
+
+  .contact:hover {color: black;}
+  .services:hover {color: black;}
+  .about:hover {color: black;}
+  /* Default state for all links */
+.navbar a {
+    color: white; /* Default link color */
+}
+
+/* Set default color for #home */
+#home {
+    color: black;
+}
+
+/* When hovering on #home, it remains black */
+#home:hover {
+    color: black !important;
+}
+
+/* When hovering over any link, ensure #home turns white */
+.navbar a:hover + #home,
+.navbar a:not(#home):hover ~ #home {
+    color: white;
+}
+
+
+
+
+  /* Centered info box styling */
+  .info-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0); /* Slightly transparent white background */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1; /* Ensure it appears above the overlay */
+      text-align: center; /* Center text inside the box */
+      font-family: "Teko", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 700;
+      font-style: normal;
+      display: flex;
+      gap: 65px;
+    }
+    /* Text content styling */
+  .profile-info {
+    max-width: 320px;
+  }
+
+  .profile-info h1 {
+    font-size: 72px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .profile-info h2 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+
+  .profile-info p {
+    font-size: 18px;
+    color: #a9a9a9;
+    margin-bottom: 25px;
+  }
+    .profile-image {
+    width: 17em;
+    height: 15em;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    right: 3em;
+    display: flex;
+    }
+    .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+    /* Social media icons */
+    .social-icons {
+    display: flex;
+    gap: 15px;
+    }
+  
+    .social-icons a {
+      font-size: 24px;
+      color: #ffffff;
+      background-color: #333333;
+      padding: 10px;
+      border-radius: 50%;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+  
+    .social-icons a:hover {
+      background-color: #555555;
+    }

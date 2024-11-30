@@ -142,7 +142,7 @@
       font-weight: 700;
       font-style: normal;
       display: flex;
-      gap: 90px;
+      gap: 65px;
     }
     /* Text content styling */
   .profile-info {
@@ -184,7 +184,7 @@
     /* Social media icons */
     .social-icons {
     display: flex;
-    gap: 15px;
+    gap: 35px;
     }
   
     .social-icons a {

@@ -28,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1); /* Adjusted opacity for lighter tint */
+    background: rgba(0, 0, 0, 0.8); /* Adjusted opacity for lighter tint */
     pointer-events: none; /* Allow clicks to pass through */
   }
 

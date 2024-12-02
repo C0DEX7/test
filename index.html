@@ -67,25 +67,36 @@
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // Resize canvas when window resizes
+  const mouse = { x: null, y: null };
+  const cells = [];
+  const maxDistance = 160; // Connection radius for cells and mouse
+
+  // Calculate number of cells based on window size
+  function calculateNumCells() {
+    return Math.floor((canvas.width * canvas.height) / 20000); // Adjust divisor for density
+  }
+
+  // Create cells
+  function createCells() {
+    cells.length = 0; // Clear existing cells
+    const numCells = calculateNumCells();
+    for (let i = 0; i < numCells; i++) {
+      cells.push(new Cell());
+    }
+  }
+
+  // Resize canvas and update cells on window resize
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    createCells();
   });
 
   // Track mouse position
-  const mouse = { x: null, y: null };
-
-  // Update mouse coordinates on move
   window.addEventListener('mousemove', (event) => {
     mouse.x = event.clientX;
     mouse.y = event.clientY;
   });
-
-  // Cell properties
-  const cells = [];
-  const numCells = 150; // Number of cells
-  const maxDistance = 160; // Connection radius for cells and mouse
 
   // Define the Cell class
   class Cell {
@@ -96,14 +107,12 @@
       this.dx = (Math.random() - 0.5) * 1.5; // Slower speed
       this.dy = (Math.random() - 0.5) * 1.5; // Slower speed
     }
-    // Update cell position and check for boundaries
     update() {
       this.x += this.dx;
       this.y += this.dy;
       if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
     }
-    // Draw the cell on the canvas
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -112,38 +121,31 @@
     }
   }
 
-  // Initialize cells
-  for (let i = 0; i < numCells; i++) {
-    cells.push(new Cell());
-  }
-
-  // Draw connections between cells if they are close enough
+  // Draw connections
   function drawConnections() {
-    // Connect cells with each other
-    for (let i = 0; i < cells.length; i++) {
-      for (let j = i + 1; j < cells.length; j++) {
-        const dist = Math.hypot(cells[i].x - cells[j].x, cells[i].y - cells[j].y);
+    cells.forEach((cell1, i) => {
+      cells.slice(i + 1).forEach((cell2) => {
+        const dist = Math.hypot(cell1.x - cell2.x, cell1.y - cell2.y);
         if (dist < maxDistance) {
           ctx.beginPath();
-          ctx.moveTo(cells[i].x, cells[i].y);
-          ctx.lineTo(cells[j].x, cells[j].y);
+          ctx.moveTo(cell1.x, cell1.y);
+          ctx.lineTo(cell2.x, cell2.y);
           ctx.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxDistance})`;
-          ctx.lineWidth = 3; // Thicker lines
+          ctx.lineWidth = 3;
           ctx.stroke();
         }
-      }
+      });
 
-      // Connect cells with mouse if within range
-      const distToMouse = Math.hypot(cells[i].x - mouse.x, cells[i].y - mouse.y);
+      const distToMouse = Math.hypot(cell1.x - mouse.x, cell1.y - mouse.y);
       if (distToMouse < maxDistance) {
         ctx.beginPath();
-        ctx.moveTo(cells[i].x, cells[i].y);
+        ctx.moveTo(cell1.x, cell1.y);
         ctx.lineTo(mouse.x, mouse.y);
         ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distToMouse / maxDistance})`;
         ctx.lineWidth = 3;
         ctx.stroke();
       }
-    }
+    });
   }
 
   // Animation loop
@@ -157,6 +159,8 @@
     requestAnimationFrame(animate);
   }
 
+  // Initialize cells and start animation
+  createCells();
   animate();
 </script>
 

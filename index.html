@@ -7,162 +7,217 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<canvas id="meshCanvas"></canvas>
-  <div class="overlay"></div>  <!-- Black tint overlay -->
-
-<div class="navbar">
-  <a href="index.html" id="home" class="home nav-link" data-width="50" data-offset="0">Home</a>
-  <a href="#about" class="services a nav-link" data-width="65" data-offset="85">Services</a>
-  <a href="#services" class="about a nav-link" data-width="80" data-offset="170">Blog</a>
-  <a href="contact.html" class="contact a nav-link" data-width="70" data-offset="270">Contact</a>
-  <div class="slider"></div>
-</div>
-
-<!-- Centered information box -->
-<div class="info-box">
-     <!-- Profile image on the left -->
-  <div class="profile-image">
-    <img src="flipper.jpeg" alt="Profile Image">
+  <canvas id="meshCanvas"></canvas>
+    <div class="overlay"></div> <!-- Black tint overlay  -->
+  
+  <div class="navbar">
+    <a href="index.html" id="home" class="home nav-link" data-width="50" data-offset="0">Home</a>
+    <a href="#about" class="services a nav-link" data-width="65" data-offset="85">Services</a>
+    <a href="#services" class="about a nav-link" data-width="80" data-offset="170">Blog</a>
+    <a href="contact.html" class="contact a nav-link" data-width="70" data-offset="270">Contact</a>
+    <div class="slider"></div>
   </div>
   
-  <!-- Info content -->
-  <div class="profile-info">
-    <h1>C0D3X7</h1>
-    <h2>Tomáš M. Pačesa</h2>
-    <p>Pentester / Child Safety Warrior / Entrepreneur</p>
-
+  <!-- Centered information box -->
+  <div class="info-box">
+       <!-- Profile image on the left -->
+    <div class="profile-image">
+      <img src="flipper.jpeg" alt="Profile Image">
+    </div>
+    
+    <!-- Info content -->
+    <div class="profile-info">
+      <h1>C0D3X7</h1>
+      <h2>Tomáš M. Pačesa</h2>
+      <p>Pentester / Child Safety Warrior / Entrepreneur</p>
+  
+    </div>
   </div>
-</div>
-
-<script>
- // Select all navbar links
- const navbarLinks = document.querySelectorAll('.navbar a');
-    const homeLink = document.getElementById('home');
-
-    navbarLinks.forEach(link => {
-        link.addEventListener('mouseover', () => {
-            if (link !== homeLink) {
-                homeLink.style.color = 'white'; // Turns white when hovering over other links
-            }
-        });
-
-        link.addEventListener('mouseout', () => {
-            if (link !== homeLink) {
-                homeLink.style.color = 'black'; // Resets to black
-            }
-        });
-    });
-
-    // Ensure homeLink stays black on hover
-    homeLink.addEventListener('mouseover', () => {
-        homeLink.style.color = 'black';
-    });
-
-
-  // Set up canvas and get context
-  const canvas = document.getElementById('meshCanvas');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const mouse = { x: null, y: null };
-  const cells = [];
-  const maxDistance = 160; // Connection radius for cells and mouse
-
-  // Calculate number of cells based on window size
-  function calculateNumCells() {
-    return Math.floor((canvas.width * canvas.height) / 7500); // Adjust divisor for density
-  }
-
-  // Create cells
-  function createCells() {
-    cells.length = 0; // Clear existing cells
-    const numCells = calculateNumCells();
-    for (let i = 0; i < numCells; i++) {
-      cells.push(new Cell());
+  
+  
+  <script>
+    function detectDarkReader() {
+      // Create a hidden test element
+      const testElement = document.createElement('div');
+      testElement.style.position = 'absolute';
+      testElement.style.top = '-9999px';
+      testElement.style.left = '-9999px';
+      testElement.style.backgroundColor = '#ffffff'; // Pure white background
+      testElement.style.color = '#000000'; // Pure black text
+      document.body.appendChild(testElement);
+  
+      const computedStyle = getComputedStyle(testElement);
+      const backgroundColor = computedStyle.backgroundColor;
+      const color = computedStyle.color;
+  
+      document.body.removeChild(testElement);
+  
+      console.log("Background color:", backgroundColor); // Debugging output
+      console.log("Text color:", color); // Debugging output
+  
+      // Use multiple checks for robustness
+      const isDarkReaderActive =
+        backgroundColor !== 'rgb(255, 255, 255)' || // Background altered
+        color !== 'rgb(0, 0, 0)' || // Text color altered
+        document.querySelector('style[media*="darkreader"]') || // Check for Dark Reader-specific styles
+        document.documentElement.getAttribute('data-darkreader-mode') !== null; // Attribute-based detection
+  
+      console.log("Dark Reader Detected:", isDarkReaderActive);
+      return isDarkReaderActive;
     }
-  }
-
-  // Resize canvas and update cells on window resize
-  window.addEventListener('resize', () => {
+  
+    // Function to display the popup
+    function showPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'darkreader-popup';
+      popup.innerHTML = `
+        <p>Dark Reader is active. Consider turning it off for better experience!</p>
+        <button onclick="this.parentElement.remove()">Close</button>
+      `;
+      document.body.appendChild(popup);
+      console.log("Popup displayed.");
+    }
+  
+    // Detect and display popup
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log("DOM fully loaded.");
+      if (detectDarkReader()) {
+        showPopup();
+      }
+    });
+  </script>
+  
+  
+  
+  
+  <script>
+    // Select all navbar links
+    const navbarLinks = document.querySelectorAll('.navbar a');
+      const homeLink = document.getElementById('home');
+  
+      navbarLinks.forEach(link => {
+          link.addEventListener('mouseover', () => {
+              if (link !== homeLink) {
+                  homeLink.style.color = 'white'; // Turns white when hovering over other links
+              }
+          });
+  
+          link.addEventListener('mouseout', () => {
+              if (link !== homeLink) {
+                  homeLink.style.color = 'black'; // Resets to black
+              }
+          });
+      });
+  
+      // Ensure homeLink stays black on hover
+      homeLink.addEventListener('mouseover', () => {
+          homeLink.style.color = 'black';
+      });
+  
+  
+    // Set up canvas and get context
+    const canvas = document.getElementById('meshCanvas');
+    const ctx = canvas.getContext('2d');
+  
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    createCells();
-  });
-
-  // Track mouse position
-  window.addEventListener('mousemove', (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-  });
-
-  // Define the Cell class
-  class Cell {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.radius = Math.random() * 1 + 6 - 2; // Random radius between 3 and 8
-      this.dx = (Math.random() - 0.5) * 1.5; // Slower speed
-      this.dy = (Math.random() - 0.5) * 1.5; // Slower speed
+  
+    const mouse = { x: null, y: null };
+    const cells = [];
+    const maxDistance = 160; // Connection radius for cells and mouse
+  
+    // Calculate number of cells based on window size
+    function calculateNumCells() {
+      return Math.floor((canvas.width * canvas.height) / 7500); // Adjust divisor for density
     }
-    update() {
-      this.x += this.dx;
-      this.y += this.dy;
-      if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+  
+    // Create cells
+    function createCells() {
+      cells.length = 0; // Clear existing cells
+      const numCells = calculateNumCells();
+      for (let i = 0; i < numCells; i++) {
+        cells.push(new Cell());
+      }
     }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#000'; // Black cells
-      ctx.fill();
+  
+    // Resize canvas and update cells on window resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createCells();
+    });
+  
+    // Track mouse position
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+  
+    // Define the Cell class
+    class Cell {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 1 + 6 - 2; // Random radius between 3 and 8
+        this.dx = (Math.random() - 0.5) * 1.5; // Slower speed
+        this.dy = (Math.random() - 0.5) * 1.5; // Slower speed
+      }
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#000'; // Black cells
+        ctx.fill();
+      }
     }
-  }
-
-  // Draw connections
-  function drawConnections() {
-    cells.forEach((cell1, i) => {
-      cells.slice(i + 1).forEach((cell2) => {
-        const dist = Math.hypot(cell1.x - cell2.x, cell1.y - cell2.y);
-        if (dist < maxDistance) {
+  
+    // Draw connections
+    function drawConnections() {
+      cells.forEach((cell1, i) => {
+        cells.slice(i + 1).forEach((cell2) => {
+          const dist = Math.hypot(cell1.x - cell2.x, cell1.y - cell2.y);
+          if (dist < maxDistance) {
+            ctx.beginPath();
+            ctx.moveTo(cell1.x, cell1.y);
+            ctx.lineTo(cell2.x, cell2.y);
+            ctx.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxDistance})`;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+          }
+        });
+  
+        const distToMouse = Math.hypot(cell1.x - mouse.x, cell1.y - mouse.y);
+        if (distToMouse < maxDistance) {
           ctx.beginPath();
           ctx.moveTo(cell1.x, cell1.y);
-          ctx.lineTo(cell2.x, cell2.y);
-          ctx.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxDistance})`;
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distToMouse / maxDistance})`;
           ctx.lineWidth = 3;
           ctx.stroke();
         }
       });
-
-      const distToMouse = Math.hypot(cell1.x - mouse.x, cell1.y - mouse.y);
-      if (distToMouse < maxDistance) {
-        ctx.beginPath();
-        ctx.moveTo(cell1.x, cell1.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distToMouse / maxDistance})`;
-        ctx.lineWidth = 3;
-        ctx.stroke();
-      }
-    });
-  }
-
-  // Animation loop
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    cells.forEach(cell => {
-      cell.update();
-      cell.draw();
-    });
-    drawConnections();
-    requestAnimationFrame(animate);
-  }
-
-  // Initialize cells and start animation
-  createCells();
-  animate();
-</script>
-
-</body>
+    }
+  
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cells.forEach(cell => {
+        cell.update();
+        cell.draw();
+      });
+      drawConnections();
+      requestAnimationFrame(animate);
+    }
+  
+    // Initialize cells and start animation
+    createCells();
+    animate();
+  </script>
+  
+  </body>
 </html>

@@ -1,4 +1,4 @@
-/* Basic reset and full-page background */
+  /* Basic reset and full-page background */
   * {
     margin: 0;
     padding: 0;
@@ -28,10 +28,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Adjusted opacity for lighter tint */
+    background: rgba(0, 0, 0, 0.8); /* Adjust opacity for tint strength */
     pointer-events: none; /* Allow clicks to pass through */
   }
 
+  
     /* Transparent Navigation Bar */
   .navbar {
     position: absolute;
@@ -122,6 +123,9 @@
     color: white;
 }
 
+
+
+
   /* Centered info box styling */
   .info-box {
       position: absolute;
@@ -131,6 +135,7 @@
       background: rgba(255, 255, 255, 0); /* Slightly transparent white background */
       border-radius: 10px;
       padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       z-index: 1; /* Ensure it appears above the overlay */
       text-align: center; /* Center text inside the box */
       font-family: "Teko", sans-serif;
@@ -196,3 +201,32 @@
     .social-icons a:hover {
       background-color: #555555;
     }
+
+
+
+    /* Dark Reader popup styling */
+  .darkreader-popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    text-align: center;
+  }
+  .darkreader-popup button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+  }
+  .darkreader-popup button:hover {
+    background-color: #777;
+  }

@@ -219,7 +219,7 @@
     gap: 15px; /* Slightly tighter spacing */
     width: 90%; /* Maximize use of smaller screens */
     padding: 15px; /* Minimal padding */
-    background: rgba(255, 255, 255, 0.2); /* Slightly stronger background for visibility */
+    background: rgba(0, 0, 0, 0.2); /* Slightly stronger background for visibility */
   }
 
   .profile-info h1 {

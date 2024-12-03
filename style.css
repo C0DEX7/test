@@ -70,7 +70,7 @@
     left: -22.6em;
     border-radius: 18px;
     border: 2px solid black;
-    position: absolute;
+    position: relative;
     transition: 0.3s ease;
     z-index: 2;
   }

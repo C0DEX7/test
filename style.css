@@ -32,8 +32,7 @@
     pointer-events: none; /* Allow clicks to pass through */
   }
 
-  
-    /* Transparent Navigation Bar */
+  /* Transparent Navigation Bar */
   .navbar {
     position: absolute;
     top: 0;
@@ -45,9 +44,9 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
-    box-shadow:0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
-  /* Navigation links */
+
   .navbar .a {
     position: relative;
     font-size: 18px;
@@ -58,11 +57,8 @@
     transition: color 0.3s;
     z-index: 9999;
   }
-  .navbar a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  .slider{
+
+  .slider {
     background-color: #ffffff;
     width: 60px;
     height: 25px;
@@ -74,6 +70,7 @@
     transition: 0.3s ease;
     z-index: 2;
   }
+
   .home {
     position: relative;
     font-size: 18px;
@@ -84,68 +81,27 @@
     transition: color 0.3s;
     z-index: 9999;
   }
-  .navbar a:nth-child(1):hover ~ .slider { transform: translateX(0); } 
-  .navbar a:nth-child(2):hover ~ .slider { transform: translateX(89px); }
-  .navbar a:nth-child(3):hover ~ .slider { transform: translateX(195px); }
-  .navbar a:nth-child(4):hover ~ .slider { transform: translateX(270px); }
-
-  .contact:hover ~ .slider {width: 80px;}
-  .services:hover ~ .slider{width: 80px;}
-  .about:hover ~ .slider {width: 50px;}
-
-  .navbar a:hover ~ #home,
-  .navbar a:hover + #home,
-  .navbar:hover #home {
-      color: white;
-  }
-
-  .contact:hover {color: black;}
-  .services:hover {color: black;}
-  .about:hover {color: black;}
-  /* Default state for all links */
-.navbar a {
-    color: white; /* Default link color */
-}
-
-/* Set default color for #home */
-#home {
-    color: black;
-}
-
-/* When hovering on #home, it remains black */
-#home:hover {
-    color: black !important;
-}
-
-/* When hovering over any link, ensure #home turns white */
-.navbar a:hover + #home,
-.navbar a:not(#home):hover ~ #home {
-    color: white;
-}
-
-
-
 
   /* Centered info box styling */
   .info-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0); /* Slightly transparent white background */
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 1; /* Ensure it appears above the overlay */
-      text-align: center; /* Center text inside the box */
-      font-family: "Teko", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 700;
-      font-style: normal;
-      display: flex;
-      gap: 65px;
-    }
-    /* Text content styling */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0); /* Slightly transparent white background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1; /* Ensure it appears above the overlay */
+    text-align: center; /* Center text inside the box */
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    display: flex;
+    gap: 65px;
+  }
+
   .profile-info {
     max-width: 320px;
   }
@@ -168,7 +124,8 @@
     color: #a9a9a9;
     margin-bottom: 25px;
   }
-    .profile-image {
+
+  .profile-image {
     width: 17em;
     height: 15em;
     border-radius: 50%;
@@ -176,57 +133,109 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     right: 3em;
     display: flex;
-    }
-    .profile-image img {
+  }
+
+  .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    }
-    /* Social media icons */
-    .social-icons {
+  }
+
+  /* Social media icons */
+  .social-icons {
     display: flex;
     gap: 15px;
-    }
-  
-    .social-icons a {
-      font-size: 24px;
-      color: #ffffff;
-      background-color: #333333;
-      padding: 10px;
-      border-radius: 50%;
-      transition: background 0.3s;
-      text-decoration: none;
-    }
-  
-    .social-icons a:hover {
-      background-color: #555555;
-    }
-
-
-
-    /* Dark Reader popup styling */
-  .darkreader-popup {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #333; /* Dark background */
-    color: #fff; /* White text */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    text-align: center;
   }
-  .darkreader-popup button {
-    margin-top: 10px;
+
+  .social-icons a {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #333333;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #555;
-    color: #fff;
-    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s;
+    text-decoration: none;
   }
-  .darkreader-popup button:hover {
-    background-color: #777;
+
+  .social-icons a:hover {
+    background-color: #555555;
   }
+  .navbar a:nth-child(1):hover ~ .slider { transform: translateX(0); } 
+  .navbar a:nth-child(2):hover ~ .slider { transform: translateX(89px); }
+  .navbar a:nth-child(3):hover ~ .slider { transform: translateX(197px); }
+  .navbar a:nth-child(4):hover ~ .slider { transform: translateX(270px); }
+
+  .contact:hover ~ .slider {width: 80px;}
+  .services:hover ~ .slider{width: 80px;}
+  .about:hover ~ .slider {width: 50px;}
+
+  .navbar a:hover ~ #home,
+  .navbar a:hover + #home,
+  .navbar:hover #home {
+      color: white;
+  }
+
+  .contact:hover {color: black;}
+  .services:hover {color: black;}
+  .about:hover {color: black;}
+  /* Default state for all links */
+
+/* Responsive styles for info-box */
+@media screen and (max-width: 768px) {
+  .info-box {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Uniform spacing */
+    width: 85%; /* Take up most of the screen, with padding */
+    padding: 20px; /* Comfortable padding for content */
+    align-items: center; /* Center-align child elements */
+    background: rgba(255, 255, 255, 0.1); /* Subtle background to improve visibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for separation */
+  }
+
+  .profile-image {
+    width: 10em; /* Moderate size for images */
+    height: 10em;
+  }
+
+  .profile-info h1 {
+    font-size: 36px; /* Large enough for emphasis */
+    margin-bottom: 10px;
+  }
+
+  .profile-info h2 {
+    font-size: 20px; /* Secondary emphasis */
+    margin-bottom: 10px;
+  }
+
+  .profile-info p {
+    font-size: 16px; /* Maintain readability */
+    line-height: 1.4; /* Better spacing between lines */
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info-box {
+    gap: 15px; /* Slightly tighter spacing */
+    width: 90%; /* Maximize use of smaller screens */
+    padding: 15px; /* Minimal padding */
+    background: rgba(255, 255, 255, 0.2); /* Slightly stronger background for visibility */
+  }
+
+  .profile-info h1 {
+    font-size: 28px; /* Compact for smaller screens */
+  }
+
+  .profile-info h2 {
+    font-size: 18px; /* Compact secondary emphasis */
+  }
+
+  .profile-info p {
+    font-size: 14px; /* Smaller text */
+  }
+
+  .profile-image {
+    width: 8em; /* Smaller image */
+    height: 8em;
+  }
+}

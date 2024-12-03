@@ -180,62 +180,54 @@
   .about:hover {color: black;}
   /* Default state for all links */
 
-/* Responsive styles for info-box */
+/* Responsive styles */
 @media screen and (max-width: 768px) {
   .info-box {
     flex-direction: column; /* Stack items vertically */
-    gap: 20px; /* Uniform spacing */
-    width: 85%; /* Take up most of the screen, with padding */
-    padding: 20px; /* Comfortable padding for content */
-    align-items: center; /* Center-align child elements */
-    background: rgba(0, 0, 0, 0.1); /* Subtle background to improve visibility */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for separation */
+    gap: 20px; /* Reduce spacing */
+    width: 90%; /* Adjust width */
+    align-items: center; /* Ensure everything stays centered */
   }
 
   .profile-image {
-    width: 10em; /* Moderate size for images */
-    height: 10em;
+    width: 18em; /* Larger image on smaller screens */
+    height: 18em;
   }
 
   .profile-info h1 {
-    font-size: 36px; /* Large enough for emphasis */
-    margin-bottom: 10px;
+    font-size: 50px; /* Adjust title size */
   }
 
   .profile-info h2 {
-    font-size: 20px; /* Secondary emphasis */
-    margin-bottom: 10px;
+    font-size: 22px; /* Adjust subtitle size */
   }
 
   .profile-info p {
-    font-size: 16px; /* Maintain readability */
-    line-height: 1.4; /* Better spacing between lines */
-    margin-bottom: 15px;
+    font-size: 16px; /* Slightly smaller text */
   }
 }
 
 @media screen and (max-width: 480px) {
   .info-box {
-    gap: 15px; /* Slightly tighter spacing */
-    width: 90%; /* Maximize use of smaller screens */
-    padding: 15px; /* Minimal padding */
-    background: rgba(0, 0, 0, 0.2); /* Slightly stronger background for visibility */
-  }
-
-  .profile-info h1 {
-    font-size: 28px; /* Compact for smaller screens */
-  }
-
-  .profile-info h2 {
-    font-size: 18px; /* Compact secondary emphasis */
-  }
-
-  .profile-info p {
-    font-size: 14px; /* Smaller text */
+    gap: 15px; /* Compact spacing */
+    padding: 10px; /* Minimal padding */
+    align-items: center; /* Keep elements centered */
   }
 
   .profile-image {
-    width: 8em; /* Smaller image */
-    height: 8em;
+    width: 20em; /* Even larger image for focus */
+    height: 20em;
+  }
+
+  .profile-info h1 {
+    font-size: 40px; /* Smaller title for compact screens */
+  }
+
+  .profile-info h2 {
+    font-size: 18px; /* Adjust subtitle size */
+  }
+
+  .profile-info p {
+    font-size: 14px; /* Adjust text size */
   }
 }

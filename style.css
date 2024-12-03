@@ -180,6 +180,39 @@
   .about:hover {color: black;}
   /* Default state for all links */
 
+
+/* Dark Reader popup styling */
+.darkreader-popup {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for perfect centering */
+  background-color: #333; /* Dark background for contrast */
+  color: #fff; /* White text for readability */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Smooth corners */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); /* Prominent shadow */
+  z-index: 99999; /* Ensure it appears above everything */
+  text-align: center;
+}
+
+/* Close button */
+.darkreader-popup button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #555; /* Button background */
+  color: #fff; /* Button text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.darkreader-popup button:hover {
+  background-color: #777; /* Slightly lighter on hover */
+}
+
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .info-box {

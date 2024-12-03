@@ -264,18 +264,3 @@
     font-size: 14px; /* Adjust text size */
   }
 }
-
-/* Adjust slider for smaller screens */
-@media screen and (max-width: 768px) {
-  .slider {
-    width: 100%; /* Wider for better visibility */
-    height: 100%; /* Adjust height proportionally */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .slider {
-    width: 100%; /* Even wider on very small screens */
-    height: 100%; /* Slightly taller for emphasis */
-  }
-}

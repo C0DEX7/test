@@ -188,7 +188,7 @@
     width: 85%; /* Take up most of the screen, with padding */
     padding: 20px; /* Comfortable padding for content */
     align-items: center; /* Center-align child elements */
-    background: rgba(255, 255, 255, 0.1); /* Subtle background to improve visibility */
+    background: rgba(0, 0, 0, 0.1); /* Subtle background to improve visibility */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for separation */
   }
 

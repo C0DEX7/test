@@ -36,6 +36,27 @@
   
   
   <script>
+    (function detectOS() {
+    const platform = navigator.platform.toLowerCase();
+    const userAgent = navigator.userAgent.toLowerCase();
+    let os = "Unknown OS";
+
+    if (platform.includes("win")) {
+        os = "Windows";
+    } else if (platform.includes("mac")) {
+        os = "macOS";
+    } else if (platform.includes("linux")) {
+        os = "Linux";
+    } else if (/android/.test(userAgent)) {
+        os = "Android";
+    } else if (/iphone|ipad|ipod/.test(userAgent)) {
+        os = "iOS";
+    }
+
+    console.log(`Operating System: ${os}`);
+})();
+
+    
     function detectDarkReader() {
       // Create a hidden test element
       const testElement = document.createElement('div');

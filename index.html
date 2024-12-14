@@ -4,37 +4,313 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomas M. Pacesa</title>
-<link rel="stylesheet" href="style.css">
+<style>
+    /* Basic reset and full-page background */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff; /* White background */
+  }
+  /* Canvas styling */
+  canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+  /* Overlay styling for black tint */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Adjust opacity for tint strength */
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+
+
+  /* Centered info box styling */
+  .info-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0); /* Slightly transparent white background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1; /* Ensure it appears above the overlay */
+    text-align: center; /* Center text inside the box */
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    display: flex;
+    gap: 65px;
+  }
+
+  .profile-info {
+    max-width: 320px;
+  }
+
+  .profile-info h1 {
+    font-size: 72px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .profile-info h2 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+
+  .profile-info p {
+    font-size: 18px;
+    color: #a9a9a9;
+    margin-bottom: 25px;
+  }
+
+  .profile-image {
+    width: 17em;
+    height: 15em;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    right: 3em;
+    display: flex;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Social media icons */
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+
+  .social-icons a {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #333333;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    background-color: #555555;
+  }
+
+ /* Menu Styling */
+ .menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    z-index: 3;
+  }
+
+  .menu-slider {
+    background-color: #ffffff;
+    width: 60px;
+    height: 25px;
+    top: -2px;
+    left: -6px;
+    border-radius: 18px;
+    border: 2px solid black;
+    position: absolute;
+    transition: 0.3s ease;
+    z-index: 2;
+  }
+
+  .menu-items {
+    display: flex;
+    gap: 30px;
+    position: relative;
+  }
+
+  .home{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .menu-items .a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Positioning slider under active link */
+  .menu-items a:nth-child(1):hover ~ .menu-slider { transform: translateX(0px); }
+  .menu-items a:nth-child(2):hover ~ .menu-slider { transform: translateX(77px); }
+  .menu-items a:nth-child(3):hover ~ .menu-slider { transform: translateX(176px); }
+  .menu-items a:nth-child(4):hover ~ .menu-slider { transform: translateX(243px); }
+
+  .contact:hover ~ .menu-slider {width: 75px;}
+  .services:hover ~ .menu-slider{width: 82px;}
+  .about:hover ~ .menu-slider {width: 50px;}
+
+  .contact:hover ~ .home {color: white;}
+  .services:hover ~ .home {color: white;}
+  .about:hover ~ .home {color: white;}
+
+  .contact:hover {color: black;}
+  .services:hover {color: black;}
+  .about:hover { color: black;}
+
+  /* Default state for all links */
+
+
+/* Dark Reader popup styling */
+.darkreader-popup {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for perfect centering */
+  background-color: #333; /* Dark background for contrast */
+  color: #fff; /* White text for readability */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Smooth corners */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); /* Prominent shadow */
+  z-index: 99999; /* Ensure it appears above everything */
+  text-align: center;
+}
+
+/* Close button */
+.darkreader-popup button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #555; /* Button background */
+  color: #fff; /* Button text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.darkreader-popup button:hover {
+  background-color: #777; /* Slightly lighter on hover */
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .info-box {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Reduce spacing */
+    width: 90%; /* Adjust width */
+    align-items: center; /* Ensure everything stays centered */
+  }
+
+  .profile-image {
+    width: 18em; /* Larger image on smaller screens */
+    height: 18em;
+  }
+
+  .profile-info h1 {
+    font-size: 50px; /* Adjust title size */
+  }
+
+  .profile-info h2 {
+    font-size: 22px; /* Adjust subtitle size */
+  }
+
+  .profile-info p {
+    font-size: 16px; /* Slightly smaller text */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info-box {
+    gap: 15px; /* Compact spacing */
+    padding: 10px; /* Minimal padding */
+    align-items: center; /* Keep elements centered */
+  }
+
+  .profile-image {
+    width: 20em; /* Even larger image for focus */
+    height: 20em;
+  }
+
+  .profile-info h1 {
+    font-size: 40px; /* Smaller title for compact screens */
+  }
+
+  .profile-info h2 {
+    font-size: 18px; /* Adjust subtitle size */
+  }
+
+  .profile-info p {
+    font-size: 14px; /* Adjust text size */
+  }
+}
+</style>
 </head>
 <body>
   <canvas id="meshCanvas"></canvas>
     <div class="overlay"></div> <!-- Black tint overlay  -->
-  
+
+    <div class="menu-container">
+      <div class="menu-items">
+        <a href="home.html" class="home">Home</a>
+        <a href="#services" class="a services">Services</a>
+        <a href="#about" class="a about">Blog</a>
+        <a href="contact.html" class="a contact">Contact</a>
+        <div class="menu-slider"></div>
+      </div>
+    </div>
+
+  <!-- Navbar for improved interaction -->
   <div class="navbar">
-    <a href="index.html" id="home" class="home nav-link" data-width="50" data-offset="0">Home</a>
-    <a href="#about" class="services a nav-link" data-width="65" data-offset="85">Services</a>
-    <a href="#services" class="about a nav-link" data-width="80" data-offset="170">Blog</a>
-    <a href="contact.html" class="contact a nav-link" data-width="70" data-offset="270">Contact</a>
-    <div class="slider"></div>
+    <a href="#section1">Section 1</a>
+    <a href="#section2">Section 2</a>
+    <a href="#section3">Section 3</a>
   </div>
-  
+
   <!-- Centered information box -->
   <div class="info-box">
        <!-- Profile image on the left -->
     <div class="profile-image">
       <img src="flipper.jpeg" alt="Profile Image">
     </div>
-    
+
     <!-- Info content -->
     <div class="profile-info">
       <h1>C0D3X7</h1>
       <h2>Tomáš M. Pačesa</h2>
       <p>Pentester / Child Safety Warrior / Entrepreneur</p>
-  
+
     </div>
   </div>
-  
-  
+
+
   <script>
     (function detectOS() {
     const platform = navigator.platform.toLowerCase();
@@ -56,7 +332,9 @@
     console.log(`Operating System: ${os}`);
 })();
 
-    
+
+
+
     function detectDarkReader() {
       // Create a hidden test element
       const testElement = document.createElement('div');
@@ -66,24 +344,24 @@
       testElement.style.backgroundColor = '#ffffff'; // Pure white background
       testElement.style.color = '#000000'; // Pure black text
       document.body.appendChild(testElement);
-  
+
       const computedStyle = getComputedStyle(testElement);
       const backgroundColor = computedStyle.backgroundColor;
       const color = computedStyle.color;
-  
+
       document.body.removeChild(testElement);
-  
+
       // Use multiple checks for robustness
       const isDarkReaderActive =
         backgroundColor !== 'rgb(255, 255, 255)' || // Background altered
         color !== 'rgb(0, 0, 0)' || // Text color altered
         document.querySelector('style[media*="darkreader"]') || // Check for Dark Reader-specific styles
         document.documentElement.getAttribute('data-darkreader-mode') !== null; // Attribute-based detection
-  
+
       console.log("Dark Reader Detected:", isDarkReaderActive);
       return isDarkReaderActive;
     }
-  
+
     // Function to display the popup
     function showPopup() {
       const popup = document.createElement('div');
@@ -95,7 +373,7 @@
       document.body.appendChild(popup);
       console.log("Popup displayed.");
     }
-  
+
     // Detect and display popup
     window.addEventListener('DOMContentLoaded', () => {
       console.log("DOM fully loaded.");
@@ -104,51 +382,55 @@
       }
     });
   </script>
-  
-  
-  
-  
+
+
+
+
   <script>
     // Select all navbar links
     const navbarLinks = document.querySelectorAll('.navbar a');
+    if (navbarLinks.length > 0) {
       const homeLink = document.getElementById('home');
-  
+
       navbarLinks.forEach(link => {
-          link.addEventListener('mouseover', () => {
-              if (link !== homeLink) {
-                  homeLink.style.color = 'white'; // Turns white when hovering over other links
-              }
-          });
-  
-          link.addEventListener('mouseout', () => {
-              if (link !== homeLink) {
-                  homeLink.style.color = 'black'; // Resets to black
-              }
-          });
+        link.addEventListener('mouseover', () => {
+          if (link !== homeLink) {
+            homeLink.style.color = 'white'; // Turns white when hovering over other links
+          }
+        });
+
+        link.addEventListener('mouseout', () => {
+          if (link !== homeLink) {
+            homeLink.style.color = 'black'; // Resets to black
+          }
+        });
       });
-  
+
       // Ensure homeLink stays black on hover
-      homeLink.addEventListener('mouseover', () => {
+      if (homeLink) {
+        homeLink.addEventListener('mouseover', () => {
           homeLink.style.color = 'black';
-      });
-  
-  
+        });
+      }
+    }
+
+
     // Set up canvas and get context
     const canvas = document.getElementById('meshCanvas');
     const ctx = canvas.getContext('2d');
-  
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  
+
     const mouse = { x: null, y: null };
     const cells = [];
     const maxDistance = 160; // Connection radius for cells and mouse
-  
+
     // Calculate number of cells based on window size
     function calculateNumCells() {
       return Math.floor((canvas.width * canvas.height) / 7500); // Adjust divisor for density
     }
-  
+
     // Create cells
     function createCells() {
       cells.length = 0; // Clear existing cells
@@ -157,20 +439,20 @@
         cells.push(new Cell());
       }
     }
-  
+
     // Resize canvas and update cells on window resize
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       createCells();
     });
-  
+
     // Track mouse position
     window.addEventListener('mousemove', (event) => {
       mouse.x = event.clientX;
       mouse.y = event.clientY;
     });
-  
+
     // Define the Cell class
     class Cell {
       constructor() {
@@ -193,7 +475,7 @@
         ctx.fill();
       }
     }
-  
+
     // Draw connections
     function drawConnections() {
       cells.forEach((cell1, i) => {
@@ -208,8 +490,9 @@
             ctx.stroke();
           }
         });
-  
-        const distToMouse = Math.hypot(cell1.x - mouse.x, cell1.y - mouse.y);
+
+        const distToMouse = Math.hypot(cell1
+.x - mouse.x, cell1.y - mouse.y);
         if (distToMouse < maxDistance) {
           ctx.beginPath();
           ctx.moveTo(cell1.x, cell1.y);

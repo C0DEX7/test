@@ -1,5 +1,5 @@
-  /* Basic reset and full-page background */
-  * {
+    /* Basic reset and full-page background */
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -32,55 +32,6 @@
     pointer-events: none; /* Allow clicks to pass through */
   }
 
-  /* Transparent Navigation Bar */
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background: transparent; /* Fully transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .navbar .a {
-    position: relative;
-    font-size: 18px;
-    color: #ffffff; /* White text color */
-    text-decoration: none;
-    margin: 0 20px;
-    padding: 5px 0;
-    transition: color 0.3s;
-    z-index: 9999;
-  }
-
-  .slider {
-    background-color: #ffffff;
-    width: 60px;
-    height: 25px;
-    top: 0px;
-    left: -22.6em;
-    border-radius: 18px;
-    border: 2px solid black;
-    position: relative;
-    transition: 0.3s ease;
-    z-index: 2;
-  }
-
-  .home {
-    position: relative;
-    font-size: 18px;
-    color: #000000;
-    text-decoration: none;
-    margin: 0 20px;
-    padding: 5px 0;
-    transition: color 0.3s;
-    z-index: 9999;
-  }
 
   /* Centered info box styling */
   .info-box {
@@ -160,24 +111,73 @@
   .social-icons a:hover {
     background-color: #555555;
   }
-  .navbar a:nth-child(1):hover ~ .slider { transform: translateX(0); } 
-  .navbar a:nth-child(2):hover ~ .slider { transform: translateX(89px); }
-  .navbar a:nth-child(3):hover ~ .slider { transform: translateX(197px); }
-  .navbar a:nth-child(4):hover ~ .slider { transform: translateX(270px); }
 
-  .contact:hover ~ .slider {width: 80px;}
-  .services:hover ~ .slider{width: 80px;}
-  .about:hover ~ .slider {width: 50px;}
-
-  .navbar a:hover ~ #home,
-  .navbar a:hover + #home,
-  .navbar:hover #home {
-      color: white;
+ /* Menu Styling */
+ .menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    z-index: 3;
   }
+
+  .menu-slider {
+    background-color: #ffffff;
+    width: 60px;
+    height: 25px;
+    top: -2px;
+    left: -6px;
+    border-radius: 18px;
+    border: 2px solid black;
+    position: absolute;
+    transition: 0.3s ease;
+    z-index: 2;
+  }
+
+  .menu-items {
+    display: flex;
+    gap: 30px;
+    position: relative;
+  }
+
+  .home{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .menu-items .a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Positioning slider under active link */
+  .menu-items a:nth-child(1):hover ~ .menu-slider { transform: translateX(0px); }
+  .menu-items a:nth-child(2):hover ~ .menu-slider { transform: translateX(77px); }
+  .menu-items a:nth-child(3):hover ~ .menu-slider { transform: translateX(176px); }
+  .menu-items a:nth-child(4):hover ~ .menu-slider { transform: translateX(243px); }
+
+  .contact:hover ~ .menu-slider {width: 75px;}
+  .services:hover ~ .menu-slider{width: 82px;}
+  .about:hover ~ .menu-slider {width: 50px;}
+
+  .contact:hover ~ .home {color: white;}
+  .services:hover ~ .home {color: white;}
+  .about:hover ~ .home {color: white;}
 
   .contact:hover {color: black;}
   .services:hover {color: black;}
-  .about:hover {color: black;}
+  .about:hover { color: black;}
+
   /* Default state for all links */
 
 

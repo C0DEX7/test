@@ -170,9 +170,11 @@
   .services:hover ~ .menu-slider{width: 82px;}
   .about:hover ~ .menu-slider {width: 50px;}
 
-  .contact:hover ~ .home {color: white;}
-  .services:hover ~ .home {color: white;}
-  .about:hover ~ .home {color: white;}
+  .services:hover ~ .home,
+  .about:hover ~ .home,
+  .contact:hover ~ .home {
+    color: white;
+  }
 
   .contact:hover {color: black;}
   .services:hover {color: black;}

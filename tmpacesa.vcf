@@ -1,12 +1,12 @@
 BEGIN:VCARD
 VERSION:4.0
 PRODID:-//BBros.us llc//bvCard.com//EN
-N:Pačesa;Tomáš Martin;;;
-FN:Tomáš Martin Pačesa,
+N:Pacesa;Tomas Martin;;;
+FN:Tomas Martin Pacesa,
 EMAIL:tomas.pacesa@gmail.com
-ORG:MGROUP, s.r.o.
+ORG:
 TEL:+420770124086
 URL;type=pref:http://pechovsky.sk
-ADR:;;;Horní Počernice;Czechia;97701;Czechia
+ADR:;;;Horni Pocernice;Czechia;97701;Czechia
 URL:https://twitter.com/itsnotomas
 END:VCARD

@@ -139,7 +139,19 @@
     font-size: 44px;
     transition: color 0.3s;
   }
-  .social-icons a:nth-child(1):hover { background-image: linear-gradient(45deg,#405DE6, #5851DB, #833AB4,  #C13584, #E1306C, #FD1D1D); -webkit-background-clip: text; color: transparent;}
+  .social-icons a:nth-child(1):hover {
+    background-image: radial-gradient(
+      circle farthest-corner at 28% 100%,
+      var(--yellow, #FFEB3B) 0%,
+      var(--yellow_to, #FFC107) 10%,
+      var(--orange, #FF5722) 22%,
+      var(--red, #F44336) 35%,
+      transparent 65%
+    ),
+    linear-gradient(145deg, var(--blue, #2196F3) 1%, var(--purple, #9C27B0) 70%);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
   .social-icons a:nth-child(2):hover { color: #0c61bf;}
   .social-icons a:nth-child(3):hover { color: #1a1a1a;}
   .social-icons a:nth-child(4):hover { color: rgb(0, 140, 255);}

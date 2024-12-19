@@ -12,7 +12,7 @@
 
     <div class="menu-container">
       <div class="menu-items">
-        <a href="index.html" class="home">Home</a>
+        <a href="home.html" class="home">Home</a>
         <a href="#about" class="a about">About</a>
         <a href="#blog" class="a blog">Blog</a>
         <a href="contact.html" class="a contact">Contact</a>
@@ -25,6 +25,19 @@
     <a href="#section1">Section 1</a>
     <a href="#section2">Section 2</a>
     <a href="#section3">Section 3</a>
+  </div>
+
+  <!-- Language Picker -->
+  <div class="language-picker">
+      <button onclick="changeLanguage('en')">
+          <img src="english.png" alt="English">
+      </button>
+      <button onclick="changeLanguage('cs')">
+          <img src="czech.png" alt="Čeština">
+      </button>
+      <button onclick="changeLanguage('de')">
+          <img src="german.png" alt="Deutsch">
+      </button>
   </div>
 
   <!-- Centered information box -->
@@ -43,27 +56,64 @@
     </div>
   </div>
 
-
   <script>
-    (function detectOS() {
-    const platform = navigator.platform.toLowerCase();
-    const userAgent = navigator.userAgent.toLowerCase();
-    let os = "Unknown OS";
+function adjustSlider(menuItem, slider, container) {
+  const menuRect = menuItem.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  const firstItem = document.querySelector('.menu-items a:first-child').getBoundingClientRect();
 
-    if (platform.includes("win")) {
-        os = "Windows";
-    } else if (platform.includes("mac")) {
-        os = "macOS";
-    } else if (platform.includes("linux")) {
-        os = "Linux";
-    } else if (/android/.test(userAgent)) {
-        os = "Android";
-    } else if (/iphone|ipad|ipod/.test(userAgent)) {
-        os = "iOS";
+  // Calculate actual offset based on width difference
+  const offsetX = menuRect.left - containerRect.left - (firstItem.left - containerRect.left);
+
+  // Apply dynamic width and position
+  slider.style.width = `${menuRect.width + 10}px`;
+  slider.style.transform = `translateX(${offsetX}px)`;
+}
+
+function changeLanguage(language) {
+    const content = {
+        en: { title: "Home", about: "About", blog: "Blog", contact: "Contact" },
+        cs: { title: "Domů", about: "O mně", blog: "Blog", contact: "Kontakt" },
+        de: { title: "Zuhause", about: "Über mich", blog: "Blog", contact: "Kontakt" },
+    };
+
+    const menuItems = document.querySelectorAll('.menu-items a');
+    const slider = document.querySelector('.menu-slider');
+    const container = document.querySelector('.menu-container');
+
+    if (content[language]) {
+        // Update menu item text
+        menuItems[0].textContent = content[language].title;
+        menuItems[1].textContent = content[language].about;
+        menuItems[2].textContent = content[language].blog;
+        menuItems[3].textContent = content[language].contact;
+
+        // Reset slider position for the first menu item
+        adjustSlider(menuItems[0], slider, container);
+    } else {
+        console.error(`Language '${language}' is not supported.`);
     }
+}
 
-    console.log(`Operating System: ${os}`);
-})();
+document.addEventListener('DOMContentLoaded', () => {
+    const defaultActiveMenu = document.querySelector('.menu-items a.home');
+    const slider = document.querySelector('.menu-slider');
+    const container = document.querySelector('.menu-container');
+    adjustSlider(defaultActiveMenu, slider, container);
+
+    // Add hover listeners for dynamic updates
+    const menuItems = document.querySelectorAll('.menu-items a');
+    menuItems.forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+            adjustSlider(item, slider, container);
+        });
+
+        item.addEventListener('mouseleave', () => {
+            adjustSlider(defaultActiveMenu, slider, container);
+        });
+    });
+});
+
 
 
 

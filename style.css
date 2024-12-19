@@ -309,7 +309,7 @@
   .language-picker{
     position: absolute;
     top: 95%;
-    left: 38%;
+    left: 35%;
     z-index: 1000;
     display: flex;
     gap: 10px;

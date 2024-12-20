@@ -299,7 +299,7 @@
 
 .menu-slider {
     position: absolute;
-    top: 1px;
+    top: -1px;
     height: 22px;
     left: -5px;
     background-color: rgb(255, 255, 255);

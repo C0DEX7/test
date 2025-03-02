@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomas M. Pacesa</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .language-picker button{
+    border: 2px rgb(51, 255, 0) solid; 
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: -6px;
+  }
+</style>
 </head>
 <body>
   <canvas id="meshCanvas"></canvas>
@@ -12,9 +22,8 @@
 
     <div class="menu-container">
       <div class="menu-items">
-        <a href="index.html" class="home">Home</a>
+        <a href="home.html" class="home">Home</a>
         <a href="about.html" class="a about">About</a>
-        <a href="#blog" class="a blog">Blog</a>
         <a href="contact.html" class="a contact">Contact</a>
         <div class="menu-slider"></div>
       </div>
@@ -29,14 +38,14 @@
 
   <!-- Language Picker -->
   <div class="language-picker">
-      <button onclick="changeLanguage('en')">
-          <img src="english.jpeg" alt="English">
+      <button class="btnen" onclick="changeLanguage('en')" onclick="border('en')">
+          <img src="flags/english.png" alt="English">
       </button>
-      <button onclick="changeLanguage('cs')">
-          <img src="czech.jpeg" alt="Čeština">
+      <button class="btncs" onclick="changeLanguage('cs')" onclick="border('cs')">
+          <img src="flags/czech.png" alt="Čeština">
       </button>
-      <button onclick="changeLanguage('de')">
-          <img src="german.jpeg" alt="Deutsch">
+      <button class="btnde" onclick="changeLanguage('de')" onclick="border('de')">
+          <img src="flags/german.png" alt="Deutsch">
       </button>
   </div>
 
@@ -52,67 +61,70 @@
       <h1>C0D3X7</h1>
       <h2>Tomáš M. Pačesa</h2>
       <p>Pentester / Child Safety Warrior / Entrepreneur</p>
-
     </div>
   </div>
 
   <script>
-function adjustSlider(menuItem, slider, container) {
-  const menuRect = menuItem.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-  const firstItem = document.querySelector('.menu-items a:first-child').getBoundingClientRect();
-
-  // Calculate actual offset based on width difference
-  const offsetX = menuRect.left - containerRect.left - (firstItem.left - containerRect.left);
-
-  // Apply dynamic width and position
-  slider.style.width = `${menuRect.width + 10}px`;
-  slider.style.transform = `translateX(${offsetX}px)`;
-}
-
-function changeLanguage(language) {
-    const content = {
-        en: { title: "Home", about: "About", blog: "Blog", contact: "Contact" },
-        cs: { title: "Domů", about: "O mně", blog: "Blog", contact: "Kontakt" },
-        de: { title: "Zuhause", about: "Über mich", blog: "Blog", contact: "Kontakt" },
-    };
-
-    const menuItems = document.querySelectorAll('.menu-items a');
-    const slider = document.querySelector('.menu-slider');
-    const container = document.querySelector('.menu-container');
-
-    if (content[language]) {
-        // Update menu item text
-        menuItems[0].textContent = content[language].title;
-        menuItems[1].textContent = content[language].about;
-        menuItems[2].textContent = content[language].blog;
-        menuItems[3].textContent = content[language].contact;
-
-        // Reset slider position for the first menu item
-        adjustSlider(menuItems[0], slider, container);
-    } else {
-        console.error(`Language '${language}' is not supported.`);
+    function adjustSlider(menuItem, slider, container) {
+      if (!menuItem || !slider || !container) return;
+      const menuRect = menuItem.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const firstItem = document.querySelector('.menu-items a:first-child');
+      if (!firstItem) return;
+      const firstItemRect = firstItem.getBoundingClientRect();
+      const offsetX = menuRect.left - containerRect.left - (firstItemRect.left - containerRect.left);
+      slider.style.width = `${menuRect.width + 10}px`;
+      slider.style.transform = `translateX(${offsetX}px)`;
     }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const defaultActiveMenu = document.querySelector('.menu-items a.home');
-    const slider = document.querySelector('.menu-slider');
-    const container = document.querySelector('.menu-container');
-    adjustSlider(defaultActiveMenu, slider, container);
+    function changeLanguage(language) {
+      const content = {
+          en: { title: "Home", about: "About", contact: "Contact" },
+          cs: { title: "Domů", about: "O mně", contact: "Kontakt" },
+          de: { title: "Zuhause", about: "Über mich", contact: "Kontakt" },
+      };
+      
+      const menuItems = document.querySelectorAll('.menu-items a');
+      const slider = document.querySelector('.menu-slider');
+      const container = document.querySelector('.menu-container');
+  
+      if (content[language]) {
+          menuItems[0].textContent = content[language].title;
+          menuItems[1].textContent = content[language].about;
+          menuItems[2].textContent = content[language].contact;
+          adjustSlider(menuItems[0], slider, container);
+      } else {
+          console.error(`Language '${language}' is not supported.`);
+      }
+    }
 
-    // Add hover listeners for dynamic updates
-    const menuItems = document.querySelectorAll('.menu-items a');
-    menuItems.forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-            adjustSlider(item, slider, container);
-        });
+    function border(languagepicker) {
+      const btnen = document.querySelector('.language-picker .btnen')
+      const btncs = document.querySelector('.language-picker .btncs')
+      const btnde = document.querySelector('.language-picker .btnde')
 
-        item.addEventListener('mouseleave', () => {
-            adjustSlider(defaultActiveMenu, slider, container);
-        });
+      if (languagepicker == en) {
+        btnen.style.border = '2px rgb(51, 255, 0) solid'
+      } else if (languagepicker == cs) {
+        btncs.style.border = '2px rgb(51, 255, 0) solid'
+      } else if (languagepicker == de) {
+        btnde.style.border = '2px rgb(51, 255, 0) solid'
+      }
+    }
+    
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuItems = document.querySelectorAll('.menu-items a');
+      const slider = document.querySelector('.menu-slider');
+      const container = document.querySelector('.menu-container');
+      let activeMenuItem = menuItems[0];
+      adjustSlider(activeMenuItem, slider, container);
+  
+      menuItems.forEach((item) => {
+        item.addEventListener('mouseenter', () => adjustSlider(item, slider, container));
+        item.addEventListener('mouseleave', () => adjustSlider(activeMenuItem, slider, container));
+      });
     });
-});
 
 
 
